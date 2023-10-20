@@ -1,9 +1,9 @@
 import './App.css'
-
+import { UserInfoPage } from './pages/UserInfoPage'
 function App() {
   return (
     <div className="page-container">
-      <p>Hi mom</p>
+      <UserInfoPage />
     </div>
   )
 }
