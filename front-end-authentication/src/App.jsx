@@ -1,19 +1,24 @@
 import './App.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Fragment } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { LogInPage } from './pages/LoginPage'
 import { UserInfoPage } from './pages/UserInfoPage'
 import { SignUpPage } from './pages/SignUpPage'
-function App() {
+import { PrivateRoute } from './auth/PrivateRoute'
+
+const App = () => {
   return (
-    <div className="page-container">
-      <BrowserRouter>
+    <Router>
+      <Fragment>
         <Routes>
-          <Route path="/" element={<UserInfoPage />} />
-          <Route path="/log-in" element={<LogInPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
+          <Route exact path="/" element={<PrivateRoute />}>
+            <Route exact path="/" element={<UserInfoPage />} />
+          </Route>
+          <Route exact path="/login" element={<LogInPage />} />
+          <Route exact path="/signup" element={<SignUpPage />} />
         </Routes>
-      </BrowserRouter>
-    </div>
+      </Fragment>
+    </Router>
   )
 }
 
