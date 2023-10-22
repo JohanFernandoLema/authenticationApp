@@ -1,3 +1,3 @@
-import { HomePage } from './homePage'
+import { homePage } from './homePage.js'
 
-export const routes = [HomePage]
+export const routes = [homePage]

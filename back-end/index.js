@@ -1,9 +1,13 @@
 import express from 'express'
 import { connectToDb } from './db.js'
+import { routes } from './routes/indexRoutes.js'
 import dotenv from 'dotenv'
 // Connections for making the server
 const app = express()
 
+routes.forEach((route) => {
+  app[route.method](route.path, route.handler)
+})
 // Middleware for enabling json
 app.use(express.json())
 dotenv.config()
