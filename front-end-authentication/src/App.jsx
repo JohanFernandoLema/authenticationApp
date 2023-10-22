@@ -8,17 +8,19 @@ import { PrivateRoute } from './auth/PrivateRoute'
 
 const App = () => {
   return (
-    <Router>
-      <Fragment>
-        <Routes>
-          <Route exact path="/" element={<PrivateRoute />}>
-            <Route exact path="/" element={<UserInfoPage />} />
-          </Route>
-          <Route exact path="/login" element={<LogInPage />} />
-          <Route exact path="/signup" element={<SignUpPage />} />
-        </Routes>
-      </Fragment>
-    </Router>
+    <div className="page-container">
+      <Router>
+        <Fragment>
+          <Routes>
+            <Route exact path="/" element={<PrivateRoute />}>
+              <Route exact path="/" element={<UserInfoPage />} />
+            </Route>
+            <Route exact path="/login" element={<LogInPage />} />
+            <Route exact path="/signup" element={<SignUpPage />} />
+          </Routes>
+        </Fragment>
+      </Router>
+    </div>
   )
 }
 
