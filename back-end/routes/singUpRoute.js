@@ -3,7 +3,5 @@ export const signUpPage = {
   method: 'post',
   handler: async (req, res) => {
     const { email, password } = req.body
-
-    const db = getDbConnection('react-auth-db')
   },
 }
