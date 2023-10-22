@@ -1,7 +1,8 @@
-export const homePage = {
-  path: '/api/home',
-  method: 'get',
-  handler: (req, res) => {
-    res.send('You have landed in the Home Page')
-  },
-}
+import express from 'express'
+const router = express.Router()
+
+router.get('/', (req, res) => {
+  res.send('You have reached the home page')
+})
+
+export default router
