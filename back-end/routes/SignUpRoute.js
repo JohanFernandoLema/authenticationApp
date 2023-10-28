@@ -16,14 +16,14 @@ router.post('/api/signup', async (req, res) => {
 
     // Save user in DB
     const user = await SignUpSchema.create({ email, password: hashPassword })
-    res.send(user)
-    //     // Generate a token for user and send it
-    //     const token = jwt.sign({ id: user._id, email }, process.env.JWT_SECRET, {
-    //       expiresIn: '2h',
-    //     })
-    //     user.token = token
-    //     user.email = email
-    //     res.status(201).json({ token })
+
+    // Generate a token for user and send it
+    const token = await jwt.sign({ id: user._id, email }, 'shhhhhhhhh', {
+      expiresIn: '2h',
+    })
+    user.token = token
+    user.email = email
+    return res.status(201).json({ email, token })
   } catch (err) {
     res.send(err)
   }
