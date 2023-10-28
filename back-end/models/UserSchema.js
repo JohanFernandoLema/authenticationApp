@@ -9,4 +9,4 @@ const SignUp = new mongoose.Schema({
   token: String,
 })
 
-export const SignUpSchema = mongoose.model('users', SignUp)
+export const User = mongoose.model('users', SignUp)

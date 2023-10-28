@@ -8,8 +8,8 @@ const app = express()
 app.use(express.json())
 app.get('/', (req, res) => res.send('Hello'))
 app.post('/api/signup', SignUpRoute)
-// Connecting with local db
 
+// Connecting with local db
 const MONGO_URI = 'mongodb://127.0.0.1:27017/react-auth-db'
 mongoose
   .connect(MONGO_URI)
