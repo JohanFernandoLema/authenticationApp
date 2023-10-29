@@ -1,13 +1,16 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import SignUpRoute from './routes/SignUpRoute.js'
+import LogInRoute from './routes/LogInRoute.js'
 
 // Middlewares
 const PORT = 5000
 const app = express()
 app.use(express.json())
-app.get('/', (req, res) => res.send('Hello'))
+
+// API's to make request to
 app.post('/api/signup', SignUpRoute)
+app.post('/api/login', LogInRoute)
 
 // Connecting with local db
 const MONGO_URI = 'mongodb://127.0.0.1:27017/react-auth-db'

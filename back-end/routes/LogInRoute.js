@@ -1,26 +1,32 @@
 import express from 'express'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import { User } from '../models/UserSchema'
+import { User } from '../models/UserSchema.js'
 
 const router = express.Router()
 
 router.post('api/login', async (req, res) => {
   const { email, password } = req.body
 
-  const user = User.findOne({ email })
+  if (!(email && password)) {
+    res.status(400).send('Fields must be completed')
+  }
 
-  if (!checkEmail) return res.send(401)
+  const user = await User.findOne({ email })
 
-  const { _id: id, passwordHash } = user
+  // Check if user does not exist
+  if (!user) {
+    res.status(401).send('User/ Password are not recognized')
+  }
 
-  const isCorrect = await bcrypt.compare(password, passwordHash)
-
-  const token = jwt.sign({ id, email }, 'shhhhhhhhh', { expiresIn: '2h' })
-  if (isCorrect) {
-    return res.status(200).json({ token })
-  } else {
-    return res.status(401)
+  // If criteria given by user is correct return cookie
+  if (user && (await bcrypt.compare(password, user.password))) {
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: '2h',
+    })
+    user.token = token
+    user.password = undefined
+    return res.status(201).json({ token })
   }
 })
 
