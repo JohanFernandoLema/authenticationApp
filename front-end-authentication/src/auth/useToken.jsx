@@ -1,7 +1,12 @@
+import { useState } from 'react'
 export const useToken = () => {
-  return (
-    <div>
-      <p>hello from useToken endpoint</p>
-    </div>
-  )
+  const [token, setTokenInternal] = useState(() => {
+    return localStorage.getItem('token')
+  })
+
+  const setToken = (newToken) => {
+    localStorage.setItem('token', newToken)
+    setTokenInternal(newToken)
+  }
+  return [token, setToken]
 }
