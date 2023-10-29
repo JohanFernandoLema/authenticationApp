@@ -2,11 +2,13 @@ import express from 'express'
 import mongoose from 'mongoose'
 import SignUpRoute from './routes/SignUpRoute.js'
 import LogInRoute from './routes/LogInRoute.js'
+import cookieParser from 'cookie-parser'
 
 // Middlewares
 const PORT = 5000
 const app = express()
 app.use(express.json())
+app.use(cookieParser())
 
 // API's to make request to
 app.post('/api/signup', SignUpRoute)
