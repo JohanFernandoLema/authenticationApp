@@ -5,29 +5,32 @@ import { User } from '../models/UserSchema.js'
 
 const router = express.Router()
 
-router.post('api/login', async (req, res) => {
+router.post('/api/login', async (req, res) => {
   const { email, password } = req.body
-
-  if (!(email && password)) {
-    res.status(400).send('Fields must be completed')
-  }
 
   const user = await User.findOne({ email })
 
   // Check if user does not exist
   if (!user) {
-    res.status(401).send('User/ Password are not recognized')
+    return res.status(401).send('User / Password are not recognized')
+  }
+  // Check for fields to be completed
+  if (!(email && password)) {
+    return res.status(401).send('Both fields are mandatory')
   }
 
-  // If criteria given by user is correct return cookie
-  if (user && (await bcrypt.compare(password, user.password))) {
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: '2h',
-    })
-    user.token = token
-    user.password = undefined
-    return res.status(201).json({ token })
+  const checkPassword = await bcrypt.compare(password, user.password)
+
+  if (!checkPassword) {
+    return res.status(401).send('User / Password are not recognized')
   }
+  const token = jwt.sign({ id: user._id, email }, 'process.env.JWT', {
+    expiresIn: '2h',
+  })
+  user.token = token
+  user.password = undefined
+
+  return res.status(200).send({ token })
 })
 
 export default router

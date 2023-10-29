@@ -18,7 +18,7 @@ router.post('/api/signup', async (req, res) => {
     const user = await User.create({ email, password: hashPassword })
 
     // Generate a token for user and send it
-    const token = await jwt.sign({ id: user._id, email }, 'shhhhhhhhh', {
+    const token = await jwt.sign({ id: user._id, email }, 'process.env.JWT', {
       expiresIn: '2h',
     })
     user.token = token
