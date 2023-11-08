@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
   res.send('Home page is working - send more data :)')
 })
 
+// register "Create Account"
 router.post('/signup', async (req, res) => {
   const { email, password } = req.body
 
@@ -36,6 +37,19 @@ router.post('/signup', async (req, res) => {
   user.password = undefined
 
   return res.json(user)
+})
+
+// Login
+
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body
+
+  const verifyEmail = await User.findOne({ email })
+
+  if (!verifyEmail) {
+    return res.send('Credentials either password or email are incorrect')
+  }
+  console.log('Working')
 })
 
 export default router
