@@ -35,7 +35,7 @@ router.post('/signup', async (req, res) => {
   user.token = token
   user.password = undefined
 
-  return res.json({user.token})
+  return res.json(user)
 })
 
 export default router
