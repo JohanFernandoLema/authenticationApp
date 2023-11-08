@@ -1,6 +1,6 @@
-import { useState } from 'react-router-dom'
+import { useState } from 'react'
 
-export const Login = () => {
+const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -37,3 +37,4 @@ export const Login = () => {
     </div>
   )
 }
+export default Login
