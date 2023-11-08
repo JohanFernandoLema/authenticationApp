@@ -44,12 +44,24 @@ router.post('/signup', async (req, res) => {
 router.post('/login', async (req, res) => {
   const { email, password } = req.body
 
-  const verifyEmail = await User.findOne({ email })
+  const user = await User.findOne({ email })
 
-  if (!verifyEmail) {
+  // Check if email exists in the database
+  if (!user) {
     return res.send('Credentials either password or email are incorrect')
   }
-  console.log('Working')
+
+  // Make sure password both hash and given password work
+  const checkPassword = await bcrypt.compare(password, user.password)
+
+  if (checkPassword) {
+    const token = jwt.sign({ id: user._id, email: user.email }, 'secret', {
+      expiresIn: '2h',
+    })
+    user.token = token
+    user.password = undefined
+    return res.json({ token })
+  }
 })
 
 export default router
