@@ -11,6 +11,7 @@ app.use(express.json())
 // CALLING URIs
 app.get('/', userRoute)
 app.post('/signup', userRoute)
+app.post('/login', userRoute)
 
 const MONGO_URI = 'mongodb://127.0.0.1:27017/react-auth-db'
 
