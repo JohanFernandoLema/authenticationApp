@@ -1,14 +1,39 @@
+import { useState } from 'react-router-dom'
+
 export const Login = () => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+
+  const onLogInClicked = async () => {
+    alert('Implementation Missing')
+  }
   return (
     <div>
+      {error && <div>{error}</div>}
       <label htmlFor="userEmail">
         Email:
-        <input type="text" placeholder="Input your email" />
+        <input
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Input your email"
+        />
       </label>
       <label htmlFor="userPassword">
-        Email:
-        <input type="text" placeholder="Input your password" />
+        Password:
+        <input
+          type="text"
+          placeholder="Input your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </label>
+      <button disabled={!(email || password)} onClick={onLogInClicked}>
+        Log In
+      </button>
+      <button>Forgot your password</button>
+      <button>Don't have an account? Sign up</button>
     </div>
   )
 }
