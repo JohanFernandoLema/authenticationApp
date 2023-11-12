@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import userRoute from './routes/userRoute.js'
 
 const app = express()
-const PORT = 3000
+const PORT = 4000
 
 // Middlewares
 app.use(express.json())
