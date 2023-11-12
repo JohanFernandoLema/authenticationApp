@@ -1,13 +1,13 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import userRoute from './routes/userRoute.js'
-
+import cors from 'cors'
 const app = express()
 const PORT = 4000
 
 // Middlewares
 app.use(express.json())
-
+app.use(cors())
 // CALLING URIs
 app.get('/', userRoute)
 app.post('/signup', userRoute)
