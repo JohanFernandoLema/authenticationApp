@@ -2,6 +2,7 @@ import './App.css'
 import LoginPage from './pages/Login.js'
 import RegisterPage from './pages/Register.js'
 import UserInfoPage from './pages/UserInfoPage.js'
+import { NotFoundPage } from './pages/NotFoundPage.js'
 import { PrivateRoute } from './auth/PrivateRoute.js'
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
 
@@ -11,7 +12,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route
-            path="/"
+            path={'/'}
             element={
               <PrivateRoute>
                 <UserInfoPage />
@@ -19,7 +20,8 @@ function App() {
             }
           />
           <Route path={'/login'} element={<LoginPage />} />
-          <Route path={'/register'} element={<RegisterPage />} />
+          <Route path={'/signup'} element={<RegisterPage />} />
+          <Route path={'*'} element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </div>

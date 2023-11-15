@@ -1,9 +1,10 @@
-import { Navigate, Route } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
+import { useUser } from './useUser'
 
 export const PrivateRoute = (props) => {
-  const user = null
+  const user = useUser()
   if (!user) {
     return <Navigate to={'/login'} />
   }
-  return <Route {...props} />
+  return <Navigate to={'/'} {...props} />
 }

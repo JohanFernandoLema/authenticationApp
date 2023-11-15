@@ -1,12 +1,25 @@
 import { useState } from 'react'
+import axios from 'axios'
+import { useToken } from '../auth/useToken.js'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
+  const [token, setToken] = useToken()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
+  const navigate = useNavigate()
+
   const onLogInClicked = async () => {
-    alert('Implementation Missing')
+    const response = await axios.post('http://localhost:4000/login', {
+      email: email,
+      password: password,
+    })
+    const { token } = response.data
+    setToken(token)
+    navigate('/')
+    console.log('You have logged in - Welcome')
   }
   return (
     <div>
