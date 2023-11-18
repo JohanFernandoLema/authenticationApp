@@ -1,3 +1,5 @@
-export const authUser = (req, res) => {
+const authUser = (req, res) => {
   res.status(200).json({ message: 'Authentication endpoint' })
 }
+
+export { authUser }
