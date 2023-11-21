@@ -1,15 +1,18 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import userRoutes from './routes/userRoutes.js'
-
+import { notFound, errorHandler } from './middleware/userMiddleware.js'
 dotenv.config()
-
+const port = process.env.PORT || 5000
 const app = express()
 
-const PORT = process.env.PORT || 5000
-app.get('/api', (req, res) => {
-  res.send('Hello my friend')
-})
-app.post('/api/users/auth', userRoutes)
+// Middlewares
+app.use(express.json())
+// app.use(notFound)
+app.use(errorHandler)
 
-app.listen(PORT, () => console.log(`The server is running on port: ${PORT}`))
+app.use('/api/users', userRoutes)
+
+app.listen(port, () => {
+  console.log(`The server is running on port: ${port}`)
+})
